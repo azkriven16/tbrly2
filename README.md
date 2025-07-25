@@ -1,6 +1,5 @@
-# 📚 TBRly
+# TBRLY<img src="./public/images/hero-img.png" alt="Landing Page" width="200">
 
-![Landing Page](./public/images/hero-img.png)
 A sleek app to track your TBR (To Be Read) list, built with Next.js, Clerk auth, shadcn/ui, Neon Postgres, and Drizzle ORM.
 
 ## Screenshots
