@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import {
   SignInButton,
   SignUpButton,
@@ -5,10 +7,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import { Book } from "lucide-react";
 import Link from "next/link";
-import { ModeToggle } from "@/components/ui/mode-toggle";
-import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
   return (
