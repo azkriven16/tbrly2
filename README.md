@@ -7,7 +7,7 @@ This project was bootstrapped with [`create-next-app`](https://nextjs.org/docs/a
 ## TODO
 
 - [x] Set up Clerk authentication
-- [ ] Integrate shadcn/ui components
+- [x] Integrate shadcn/ui components
 - [ ] Connect to Neon Postgres with Drizzle ORM
 - [ ] Implement TBR list CRUD features
 - [ ] Add user dashboard and book details pages
