@@ -13,7 +13,7 @@ export const HeaderSection = async () => {
         <div>
           <h1 className="text-4xl font-bold mb-2">
             {user?.username
-              ? `@${user.username}'s TBR List`
+              ? `${user.username}'s TBR List`
               : user?.firstName
               ? `${user.firstName}'s TBR List`
               : "Your TBR List"}
