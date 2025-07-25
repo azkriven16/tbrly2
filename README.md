@@ -9,6 +9,7 @@ This project was bootstrapped with [`create-next-app`](https://nextjs.org/docs/a
 - [x] Set up Clerk authentication
 - [x] Integrate shadcn/ui components
 - [x] Connect to Neon Postgres with Drizzle ORM
+- [ ] Sync Clerk user data to the database
 - [ ] Implement TBR list CRUD features
 - [ ] Add user dashboard and book details pages
 - [ ] Write basic tests and CI setup
