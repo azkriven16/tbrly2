@@ -222,6 +222,16 @@ export default function SignUpPage() {
                   </Card>
                 </SignUp.Strategy>
               </SignUp.Step>
+              <SignUp.Step name="continue">
+                <h1>Fill in missing fields</h1>
+                <Clerk.Field name="username">
+                  <Clerk.Label>Username</Clerk.Label>
+                  <Clerk.Input />
+                  <Clerk.FieldError />
+                </Clerk.Field>
+
+                <SignUp.Action submit>Continue</SignUp.Action>
+              </SignUp.Step>
             </>
           )}
         </Clerk.Loading>

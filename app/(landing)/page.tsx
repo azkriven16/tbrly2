@@ -13,7 +13,7 @@ export default async function Home() {
   if (userId) redirect("/dashboard");
 
   return (
-    <div className="min-h-screen">
+    <div>
       <HeroSection />
       <FeaturesSection />
       <CTASection />
