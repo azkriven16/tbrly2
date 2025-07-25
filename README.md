@@ -1,4 +1,3 @@
-
 # TBRly
 
 A sleek app to track your TBR (To Be Read) list, built with Next.js, Clerk auth, shadcn/ui, Neon Postgres, and Drizzle ORM.
@@ -7,13 +6,12 @@ This project was bootstrapped with [`create-next-app`](https://nextjs.org/docs/a
 
 ## TODO
 
-- [ ] Set up Clerk authentication
+- [x] Set up Clerk authentication
 - [ ] Integrate shadcn/ui components
 - [ ] Connect to Neon Postgres with Drizzle ORM
 - [ ] Implement TBR list CRUD features
 - [ ] Add user dashboard and book details pages
 - [ ] Write basic tests and CI setup
-
 
 ## Getting Started
 
