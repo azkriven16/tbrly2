@@ -5,17 +5,17 @@ import { currentUser } from "@clerk/nextjs/server";
 
 export const HeaderSection = async () => {
   const user = await currentUser();
-
+  console.log(user?.username);
   return (
     <section className="py-10">
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row items-start justify-between mb-8 border-b pb-2">
         <div>
           <h1 className="text-4xl font-bold mb-2">
-            {user?.firstName && user?.lastName
-              ? `${user.firstName} ${user.lastName}'s TBR List`
-              : user?.fullName
-              ? `${user.fullName}'s TBR List`
+            {user?.username
+              ? `@${user.username}'s TBR List`
+              : user?.firstName
+              ? `${user.firstName}'s TBR List`
               : "Your TBR List"}
           </h1>
           <p className="text-gray-400 text-lg">
