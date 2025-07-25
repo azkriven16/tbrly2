@@ -1,12 +1,3 @@
-<div style={{ textAlign: "center" }}>
-  <img 
-    src="./public/images/hero-img.png" 
-    alt="Dashboard" 
-    height="100" 
-    style={{ borderRadius: "9999px" }} 
-  />
-</div>
-
 # 📚 TBRly
 
 A sleek app to track your TBR (To Be Read) list, built with Next.js, Clerk auth, shadcn/ui, Neon Postgres, and Drizzle ORM.
