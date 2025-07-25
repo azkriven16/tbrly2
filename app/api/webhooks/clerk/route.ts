@@ -68,17 +68,17 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    if (evt.type === "user.deleted") {
-      const { id } = evt.data;
+    // if (evt.type === "user.deleted") {
+    //   const { id } = evt.data;
 
-      const deletedUser = await deleteUser(id!);
+    //   const deletedUser = await deleteUser(id!);
 
-      console.log("User deleted:", deletedUser);
-      return NextResponse.json({
-        message: "User deleted successfully",
-        user: deletedUser,
-      });
-    }
+    //   console.log("User deleted:", deletedUser);
+    //   return NextResponse.json({
+    //     message: "User deleted successfully",
+    //     user: deletedUser,
+    //   });
+    // }
 
     return NextResponse.json({ message: "Webhook received" }, { status: 200 });
   } catch (err) {
