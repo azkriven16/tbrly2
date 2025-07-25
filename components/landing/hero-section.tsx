@@ -10,7 +10,7 @@ export const HeroSection = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-center mb-6">
           <Image
-            src="/hero-img.jpg"
+            src="/images/hero-img.png"
             alt="Hero Image"
             width={500}
             height={300}
