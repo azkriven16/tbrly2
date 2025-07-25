@@ -1,6 +1,6 @@
-import { FaGithub, FaGoogle, FaSpinner } from "react-icons/fa";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { ComponentProps } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export const Icons = {
   spinner: (props: ComponentProps<"svg">) => (
