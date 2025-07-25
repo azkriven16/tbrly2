@@ -1,5 +1,4 @@
 "use client";
-
 import * as Clerk from "@clerk/elements/common";
 import * as SignUp from "@clerk/elements/sign-up";
 import { Button } from "@/components/ui/button";
@@ -56,6 +55,15 @@ export default function SignUpPage() {
                     <p className="flex items-center gap-x-3 text-sm text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
                       or
                     </p>
+                    <Clerk.Field name="username" className="space-y-2">
+                      <Clerk.Label asChild>
+                        <Label>Username</Label>
+                      </Clerk.Label>
+                      <Clerk.Input type="text" required asChild>
+                        <Input />
+                      </Clerk.Input>
+                      <Clerk.FieldError className="block text-sm text-destructive" />
+                    </Clerk.Field>
                     <Clerk.Field name="emailAddress" className="space-y-2">
                       <Clerk.Label asChild>
                         <Label>Email address</Label>
@@ -104,44 +112,18 @@ export default function SignUpPage() {
               <SignUp.Step name="continue">
                 <Card className="w-full sm:w-96">
                   <CardHeader>
-                    <CardTitle>Choose your username</CardTitle>
-                    <CardDescription>
-                      Pick a unique username that represents you
-                    </CardDescription>
+                    <CardTitle>Continue registration</CardTitle>
                   </CardHeader>
-                  <CardContent className="grid gap-y-4">
+                  <CardContent>
                     <Clerk.Field name="username" className="space-y-2">
-                      <Clerk.Label asChild>
+                      <Clerk.Label>
                         <Label>Username</Label>
                       </Clerk.Label>
                       <Clerk.Input type="text" required asChild>
-                        <Input placeholder="Enter your username" />
+                        <Input />
                       </Clerk.Input>
                       <Clerk.FieldError className="block text-sm text-destructive" />
-                      <p className="text-xs text-muted-foreground">
-                        This will be your unique identifier on the platform
-                      </p>
                     </Clerk.Field>
-                    <div className="grid grid-cols-2 gap-4">
-                      <Clerk.Field name="firstName" className="space-y-2">
-                        <Clerk.Label asChild>
-                          <Label>First name</Label>
-                        </Clerk.Label>
-                        <Clerk.Input type="text" required asChild>
-                          <Input placeholder="John" />
-                        </Clerk.Input>
-                        <Clerk.FieldError className="block text-sm text-destructive" />
-                      </Clerk.Field>
-                      <Clerk.Field name="lastName" className="space-y-2">
-                        <Clerk.Label asChild>
-                          <Label>Last name</Label>
-                        </Clerk.Label>
-                        <Clerk.Input type="text" required asChild>
-                          <Input placeholder="Doe" />
-                        </Clerk.Input>
-                        <Clerk.FieldError className="block text-sm text-destructive" />
-                      </Clerk.Field>
-                    </div>
                   </CardContent>
                   <CardFooter>
                     <div className="grid w-full gap-y-4">
@@ -238,7 +220,7 @@ export default function SignUpPage() {
                                 return isLoading ? (
                                   <Icons.spinner className="size-4 animate-spin" />
                                 ) : (
-                                  "Complete Sign Up"
+                                  "Continue"
                                 );
                               }}
                             </Clerk.Loading>
