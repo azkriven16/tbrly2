@@ -5,22 +5,43 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { Book } from "lucide-react";
+import Link from "next/link";
 
 export const Navbar = () => {
   return (
-    <header>
-      <nav></nav>
-      <SignedOut>
-        <SignInButton />
-        <SignUpButton>
-          <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-            Sign Up
-          </button>
-        </SignUpButton>
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="container flex h-14 max-w-screen-2xl items-center justify-between">
+        {/* Logo/Brand */}
+        <Link href="/" className="flex items-center gap-1">
+          <Book className="h-6 w-6 text-primary" />
+          <span className="font-bold">TBRLY</span>
+        </Link>
+
+        {/* Auth Buttons */}
+        <div className="flex items-center gap-3">
+          <SignedOut>
+            <SignInButton>
+              <Button variant="ghost" size="sm">
+                Sign In
+              </Button>
+            </SignInButton>
+            <SignUpButton>
+              <Button size="sm">Sign Up</Button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "h-8 w-8",
+                },
+              }}
+            />
+          </SignedIn>
+        </div>
+      </nav>
     </header>
   );
 };
