@@ -1,19 +1,34 @@
 import { Navbar } from "@/components/navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
-
 import localFont from "next/font/local";
+import { Caesar_Dressing, Funnel_Sans } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+
+const caesar = Caesar_Dressing({
+  subsets: ["latin"],
+  variable: "--font-caesar",
+  weight: "400",
+});
+
+const funnelSans = Funnel_Sans({
+  subsets: ["latin"],
+  variable: "--font-funnel-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,12 +43,19 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased p-2 max-w-3xl mx-auto`}
+          className={`${geistSans.variable} ${geistMono.variable} ${caesar.variable} ${funnelSans.variable} font-sans antialiased p-2 max-w-3xl mx-auto`}
         >
-          <Navbar />
-          <main>{children}</main>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
+            <main>{children}</main>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

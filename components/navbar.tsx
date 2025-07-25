@@ -5,22 +5,25 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
 import { Book } from "lucide-react";
 import Link from "next/link";
+import { ModeToggle } from "@/components/ui/mode-toggle";
+import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container flex h-14 max-w-screen-2xl items-center justify-between">
         {/* Logo/Brand */}
-        <Link href="/" className="flex items-center gap-1">
-          <Book className="h-6 w-6 text-primary" />
-          <span className="font-bold">TBRLY</span>
+        <Link href="/" className="flex items-center gap-2">
+          {/* <Book className="h-6 w-6 text-primary" /> */}
+          <span className="font-funnel text-2xl font-black text-primary hover:text-primary/80 transition-colors tracking-wide">
+            TBRLY
+          </span>
         </Link>
-
         {/* Auth Buttons */}
         <div className="flex items-center gap-3">
+          <ModeToggle />
           <SignedOut>
             <SignInButton>
               <Button variant="ghost" size="sm">

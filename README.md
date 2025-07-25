@@ -9,10 +9,20 @@ This project was bootstrapped with [`create-next-app`](https://nextjs.org/docs/a
 - [x] Set up Clerk authentication
 - [x] Integrate shadcn/ui components
 - [x] Connect to Neon Postgres with Drizzle ORM
-- [ ] Sync Clerk user data to the database
+- [x] Sync Clerk user data to the database
 - [ ] Implement TBR list CRUD features
 - [ ] Add user dashboard and book details pages
 - [ ] Write basic tests and CI setup
+
+## TODO UI
+
+- [x] Customize Clerk Sign In UI with shadcn/ui styling
+- [x] Update header UI (layout, navigation, responsiveness)
+- [x] Add dark mode support using shadcn/ui theme system
+- [x] Create landing page
+  - [x] Hero section (headline, subtext, call-to-action)
+  - [x] Feature highlights section
+  - [x] Final call-to-action (sign up or start reading)
 
 ## Getting Started
 
