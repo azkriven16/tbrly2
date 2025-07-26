@@ -28,6 +28,7 @@ A sleek app to track your TBR (To Be Read) list, built with Next.js, Clerk auth,
   - [x] Hero section (headline, subtext, call-to-action)
   - [x] Feature highlights section
   - [x] Final call-to-action (sign up or start reading)
+- [x] Add edit functionality, search filters, and genre tags
 - [ ] Implement TBR list CRUD features
 - [ ] Add user dashboard and book details pages
 - [ ] Write basic tests and CI setup

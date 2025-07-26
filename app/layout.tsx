@@ -46,7 +46,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} ${caesar.variable} ${funnelSans.variable} font-sans antialiased p-2 max-w-3xl mx-auto`}
+          className={`${geistSans.variable} ${geistMono.variable} ${caesar.variable} ${funnelSans.variable} font-sans antialiased p-2`}
         >
           <ThemeProvider
             attribute="class"
@@ -55,8 +55,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Navbar />
-            <main>{children}</main>
-            <Toaster />
+            <main className="max-w-3xl mx-auto">{children}</main>
+            <Toaster richColors position="top-center" />
           </ThemeProvider>
         </body>
       </html>
