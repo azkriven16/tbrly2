@@ -150,12 +150,12 @@ export const TBRFilters = ({
     <div className="space-y-4 mb-6">
       {/* Search Bar */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4" />
         <Input
           placeholder="Search books by title..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-10 bg-gray-800 border-gray-700 text-white placeholder-gray-400"
+          className="pl-10"
         />
       </div>
 
@@ -163,10 +163,7 @@ export const TBRFilters = ({
       <div className="flex items-center justify-between">
         <Collapsible open={isFiltersOpen} onOpenChange={setIsFiltersOpen}>
           <CollapsibleTrigger asChild>
-            <Button
-              variant="outline"
-              className="bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700"
-            >
+            <Button variant="outline">
               <SlidersHorizontal className="w-4 h-4 mr-2" />
               Filters
               <ChevronDown
@@ -181,26 +178,18 @@ export const TBRFilters = ({
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {/* Status Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">
-                  Status
-                </label>
+                <label className="text-sm font-medium">Status</label>
                 <Select
                   value={selectedStatus}
                   onValueChange={setSelectedStatus}
                 >
-                  <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                  <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-gray-800 border-gray-700">
-                    <SelectItem value="all" className="text-white">
-                      All Statuses
-                    </SelectItem>
+                  <SelectContent>
+                    <SelectItem value="all">All Statuses</SelectItem>
                     {BOOK_STATUSES.map((status) => (
-                      <SelectItem
-                        key={status}
-                        value={status}
-                        className="text-white"
-                      >
+                      <SelectItem key={status} value={status}>
                         {status}
                       </SelectItem>
                     ))}
@@ -210,26 +199,18 @@ export const TBRFilters = ({
 
               {/* Category Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">
-                  Category
-                </label>
+                <label className="text-sm font-medium">Category</label>
                 <Select
                   value={selectedCategory}
                   onValueChange={setSelectedCategory}
                 >
-                  <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                  <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-gray-800 border-gray-700">
-                    <SelectItem value="all" className="text-white">
-                      All Categories
-                    </SelectItem>
+                  <SelectContent>
+                    <SelectItem value="all">All Categories</SelectItem>
                     {BOOK_CATEGORIES.map((category) => (
-                      <SelectItem
-                        key={category}
-                        value={category}
-                        className="text-white"
-                      >
+                      <SelectItem key={category} value={category}>
                         {category}
                       </SelectItem>
                     ))}
@@ -239,55 +220,33 @@ export const TBRFilters = ({
 
               {/* Rating Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">
-                  Rating
-                </label>
+                <label className="text-sm font-medium">Rating</label>
                 <Select value={ratingFilter} onValueChange={setRatingFilter}>
-                  <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                  <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-gray-800 border-gray-700">
-                    <SelectItem value="all" className="text-white">
-                      All Ratings
-                    </SelectItem>
-                    <SelectItem value="rated" className="text-white">
-                      Rated Books
-                    </SelectItem>
-                    <SelectItem value="unrated" className="text-white">
-                      Unrated Books
-                    </SelectItem>
-                    <SelectItem value="high" className="text-white">
-                      High Rated (4+)
-                    </SelectItem>
+                  <SelectContent>
+                    <SelectItem value="all">All Ratings</SelectItem>
+                    <SelectItem value="rated">Rated Books</SelectItem>
+                    <SelectItem value="unrated">Unrated Books</SelectItem>
+                    <SelectItem value="high">High Rated (4+)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {/* Sort By */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">
-                  Sort By
-                </label>
+                <label className="text-sm font-medium">Sort By</label>
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="bg-gray-800 border-gray-700 text-white">
+                  <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-gray-800 border-gray-700">
-                    <SelectItem value="recent" className="text-white">
-                      Recently Added
-                    </SelectItem>
-                    <SelectItem value="title" className="text-white">
-                      Title A-Z
-                    </SelectItem>
-                    <SelectItem value="rating" className="text-white">
-                      Rating (High to Low)
-                    </SelectItem>
-                    <SelectItem value="status" className="text-white">
-                      Status
-                    </SelectItem>
-                    <SelectItem value="category" className="text-white">
-                      Category
-                    </SelectItem>
+                  <SelectContent>
+                    <SelectItem value="recent">Recently Added</SelectItem>
+                    <SelectItem value="title">Title A-Z</SelectItem>
+                    <SelectItem value="rating">Rating (High to Low)</SelectItem>
+                    <SelectItem value="status">Status</SelectItem>
+                    <SelectItem value="category">Category</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -296,9 +255,7 @@ export const TBRFilters = ({
             {/* Genre Filter */}
             {allGenres.length > 0 && (
               <div className="mt-4 space-y-2">
-                <label className="text-sm font-medium text-gray-300">
-                  Genres
-                </label>
+                <label className="text-sm font-medium">Genres</label>
                 <div className="flex flex-wrap gap-2">
                   {allGenres.map((genre) => (
                     <Badge
@@ -309,7 +266,7 @@ export const TBRFilters = ({
                       className={`cursor-pointer transition-colors ${
                         selectedGenres.includes(genre)
                           ? "bg-blue-600 text-blue-100 hover:bg-blue-700"
-                          : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                          : "border"
                       }`}
                       onClick={() => handleGenreToggle(genre)}
                     >
@@ -324,11 +281,7 @@ export const TBRFilters = ({
 
         {/* Clear Filters */}
         {hasActiveFilters && (
-          <Button
-            variant="ghost"
-            onClick={handleClearFilters}
-            className="text-gray-400 hover:text-white hover:bg-gray-800"
-          >
+          <Button className="ml-5 mt-5" size="sm" onClick={handleClearFilters}>
             <X className="w-4 h-4 mr-2" />
             Clear Filters
           </Button>
@@ -339,10 +292,7 @@ export const TBRFilters = ({
       {hasActiveFilters && (
         <div className="flex flex-wrap gap-2">
           {searchTerm && (
-            <Badge
-              variant="outline"
-              className="bg-gray-800 text-gray-300 border-gray-600"
-            >
+            <Badge variant="outline">
               Search: &quot;{searchTerm}&quot;
               <button
                 onClick={() => setSearchTerm("")}
@@ -353,10 +303,7 @@ export const TBRFilters = ({
             </Badge>
           )}
           {selectedStatus !== "all" && (
-            <Badge
-              variant="outline"
-              className="bg-gray-800 text-gray-300 border-gray-600"
-            >
+            <Badge variant="outline">
               Status: {selectedStatus}
               <button
                 onClick={() => setSelectedStatus("all")}
@@ -367,10 +314,7 @@ export const TBRFilters = ({
             </Badge>
           )}
           {selectedCategory !== "all" && (
-            <Badge
-              variant="outline"
-              className="bg-gray-800 text-gray-300 border-gray-600"
-            >
+            <Badge variant="outline">
               Category: {selectedCategory}
               <button
                 onClick={() => setSelectedCategory("all")}
@@ -381,11 +325,7 @@ export const TBRFilters = ({
             </Badge>
           )}
           {selectedGenres.map((genre) => (
-            <Badge
-              key={genre}
-              variant="outline"
-              className="bg-gray-800 text-gray-300 border-gray-600"
-            >
+            <Badge key={genre} variant="outline">
               Genre: {genre}
               <button
                 onClick={() => handleGenreToggle(genre)}
@@ -399,7 +339,7 @@ export const TBRFilters = ({
       )}
 
       {/* Results Count */}
-      <div className="text-sm text-gray-400">
+      <div className="text-sm ">
         Showing {filteredBooks.length} of {books.length} books
       </div>
     </div>

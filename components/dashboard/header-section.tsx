@@ -1,10 +1,7 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import { currentUser } from "@clerk/nextjs/server";
 import { getUserReadingStats } from "@/actions/tbr-actions";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { CreateTBRButton } from "@/components/dashboard/create-tbr-button";
 
 export const HeaderSection = async () => {
   const user = await currentUser();
@@ -37,10 +34,7 @@ export const HeaderSection = async () => {
           </p>
         </div>
 
-        <Button className="bg-white text-gray-900 hover:bg-gray-100 font-medium sm:mt-0 mt-5">
-          <Plus className="h-4 w-4 mr-2" />
-          Add Entry
-        </Button>
+        <CreateTBRButton />
       </div>
 
       {/* Stats Section */}

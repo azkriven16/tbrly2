@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Edit, Trash2, Star } from "lucide-react";
 import Image from "next/image";
-import { EditEntryModal } from "./tbr-edit-modal";
+import { EditEntryModal } from "./edit-tbr-modal";
 // Import your server actions when ready
 // import { deleteBook, updateBookStatus } from "@/actions/tbr-actions";
 
