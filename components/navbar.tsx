@@ -12,7 +12,7 @@ import Link from "next/link";
 export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container flex h-14 p-2 max-w-3xl mx-auto items-center justify-between">
+      <nav className="container flex h-14 p-2 max-w-4xl mx-auto items-center justify-between">
         {/* Logo/Brand */}
         <Link href="/" className="flex items-center gap-2">
           {/* <Book className="h-6 w-6 text-primary" /> */}

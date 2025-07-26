@@ -1,71 +1,85 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Book } from "@/db/schema";
+import type { Book } from "@/db/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Edit, Trash2, Star } from "lucide-react";
 import Image from "next/image";
 import { EditEntryModal } from "./edit-tbr-modal";
-// Import your server actions when ready
-// import { deleteBook, updateBookStatus } from "@/actions/tbr-actions";
+import { DeleteTBRModal } from "./delete-tbr-modal";
+import { updateBookStatus } from "@/actions/tbr-actions";
+import { toast } from "sonner";
 
 interface TBRCardProps {
   book: Book;
-  onUpdate?: () => void; // Callback to refresh data after updates
+  onUpdate?: () => void;
+  onOptimisticDelete?: (bookId: number) => void;
+  onDeleteError?: (bookId: number) => void;
+  onOptimisticUpdate?: (bookId: number, data: Partial<Book>) => void;
 }
 
-export const TBRCard = ({ book, onUpdate }: TBRCardProps) => {
+export const TBRCard = ({
+  book,
+  onUpdate,
+  onOptimisticDelete,
+  onDeleteError,
+  onOptimisticUpdate,
+}: TBRCardProps) => {
   const [isPending, startTransition] = useTransition();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  // Client-side handler functions
   const handleEdit = () => {
     setIsEditModalOpen(true);
   };
 
   const handleEditSuccess = () => {
-    // Called when edit is successful
-    onUpdate?.(); // Refresh parent data if needed
-  };
-
-  const handleDelete = async (bookId: number) => {
-    // Add confirmation dialog
-    if (!confirm("Are you sure you want to delete this book?")) {
-      return;
-    }
-
-    startTransition(async () => {
-      try {
-        // Uncomment when you have the server action ready
-        // const result = await deleteBook(bookId, userId);
-        // if (result.success) {
-        //   onUpdate?.(); // Refresh data
-        //   console.log("Book deleted successfully");
-        // } else {
-        //   console.error("Failed to delete book:", result.error);
-        // }
-        console.log("Delete book:", bookId);
-      } catch (error) {
-        console.error("Error deleting book:", error);
-      }
+    onUpdate?.();
+    toast.success("Book updated successfully", {
+      description: "Your changes have been saved",
     });
   };
 
+  const handleDelete = () => {
+    setIsDeleteModalOpen(true);
+  };
+
   const handleStatusChange = async (bookId: number, newStatus: string) => {
+    const previousStatus = book.status;
+
+    // Show optimistic success toast
+    const toastId = toast.success("Status updated", {
+      description: `Changed to "${newStatus}"`,
+    });
+
     startTransition(async () => {
       try {
-        // Uncomment when you have the server action ready
-        // const result = await updateBookStatus(bookId, userId, newStatus);
-        // if (result.success) {
-        //   onUpdate?.(); // Refresh data
-        //   console.log("Status updated successfully");
-        // } else {
-        //   console.error("Failed to update status:", result.error);
-        // }
-        console.log("Change status:", bookId, newStatus);
+        // Make optimistic updates inside the transition
+        onOptimisticUpdate?.(bookId, { status: newStatus });
+
+        const result = await updateBookStatus(bookId, book.userId, newStatus);
+
+        if (result.success) {
+          onUpdate?.(); // Refresh data to sync with server
+        } else {
+          // Revert optimistic updates on failure
+          onOptimisticUpdate?.(bookId, { status: previousStatus });
+          toast.dismiss(toastId);
+          toast.error("Failed to update status", {
+            description:
+              result.error || "Something went wrong. Please try again.",
+          });
+        }
       } catch (error) {
+        // Revert optimistic updates on error
+        onOptimisticUpdate?.(bookId, { status: previousStatus });
+        toast.dismiss(toastId);
+        toast.error("Failed to update status", {
+          description:
+            "Network error. Please check your connection and try again.",
+        });
         console.error("Error updating status:", error);
       }
     });
@@ -114,7 +128,7 @@ export const TBRCard = ({ book, onUpdate }: TBRCardProps) => {
             <div className="flex-shrink-0">
               {book.imageUrl ? (
                 <Image
-                  src={book.imageUrl}
+                  src={book.imageUrl || "/placeholder.svg"}
                   alt={book.title}
                   width={80}
                   height={120}
@@ -139,7 +153,7 @@ export const TBRCard = ({ book, onUpdate }: TBRCardProps) => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleEdit()}
+                    onClick={handleEdit}
                     disabled={isPending}
                     className="text-gray-400 hover:text-white hover:bg-gray-800"
                   >
@@ -148,7 +162,7 @@ export const TBRCard = ({ book, onUpdate }: TBRCardProps) => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleDelete(book.id)}
+                    onClick={handleDelete}
                     disabled={isPending}
                     className="text-gray-400 hover:text-red-400 hover:bg-gray-800"
                   >
@@ -230,6 +244,15 @@ export const TBRCard = ({ book, onUpdate }: TBRCardProps) => {
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         onSuccess={handleEditSuccess}
+      />
+
+      {/* Delete Modal */}
+      <DeleteTBRModal
+        book={book}
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onOptimisticDelete={onOptimisticDelete}
+        onDeleteError={onDeleteError}
       />
     </>
   );

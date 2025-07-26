@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { type Book, BOOK_CATEGORIES, BOOK_STATUSES } from "@/db/schema";
 import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 
 interface TBRFiltersProps {
   books: Book[];
@@ -35,6 +35,13 @@ export const TBRFilters = ({
   const [ratingFilter, setRatingFilter] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("recent");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+
+  // Use ref to store the callback and prevent dependency issues
+  const onFilteredBooksChangeRef = useRef(onFilteredBooksChange);
+  onFilteredBooksChangeRef.current = onFilteredBooksChange;
+
+  // Use ref to track last filtered result to prevent unnecessary calls
+  const lastFilteredRef = useRef<string>("");
 
   // Extract all unique genres from books
   const allGenres = useMemo(() => {
@@ -118,10 +125,31 @@ export const TBRFilters = ({
     sortBy,
   ]);
 
-  // Update parent component when filtered books change
+  // Update parent component when filtered books change, but only if they actually changed
   useEffect(() => {
-    onFilteredBooksChange(filteredBooks);
-  }, [filteredBooks, onFilteredBooksChange]);
+    const filteredKey = filteredBooks
+      .map((book) => `${book.id}-${book.status}`)
+      .join(",");
+
+    if (filteredKey !== lastFilteredRef.current) {
+      lastFilteredRef.current = filteredKey;
+      onFilteredBooksChangeRef.current(filteredBooks);
+    }
+  }, [filteredBooks]);
+
+  // Clean up selected genres when books change (for optimistic updates)
+  useEffect(() => {
+    if (selectedGenres.length > 0) {
+      const availableGenres = new Set(allGenres);
+      const validGenres = selectedGenres.filter((genre) =>
+        availableGenres.has(genre)
+      );
+
+      if (validGenres.length !== selectedGenres.length) {
+        setSelectedGenres(validGenres);
+      }
+    }
+  }, [allGenres, selectedGenres]);
 
   const handleGenreToggle = (genre: string) => {
     setSelectedGenres((prev) =>
@@ -176,7 +204,6 @@ export const TBRFilters = ({
               />
             </Button>
           </CollapsibleTrigger>
-
           <CollapsibleContent className="mt-4">
             <div className="space-y-4">
               {/* Mobile-first: Stack filters vertically, then responsive grid */}
@@ -361,6 +388,9 @@ export const TBRFilters = ({
       {/* Results Count */}
       <div className="text-sm text-muted-foreground bg-muted/30 px-3 py-2 rounded-md">
         Showing {filteredBooks.length} of {books.length} books
+        {hasActiveFilters && (
+          <span className="ml-2 text-blue-400">(filtered)</span>
+        )}
       </div>
     </div>
   );
