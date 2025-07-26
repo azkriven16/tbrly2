@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
-import { Book, BOOK_CATEGORIES, BOOK_STATUSES } from "@/db/schema";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -12,18 +15,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import {
-  Search,
-  Filter,
-  X,
-  ChevronDown,
-  SlidersHorizontal,
-} from "lucide-react";
+import { Book, BOOK_CATEGORIES, BOOK_STATUSES } from "@/db/schema";
+import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
 interface TBRFiltersProps {
   books: Book[];
