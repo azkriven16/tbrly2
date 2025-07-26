@@ -1,12 +1,12 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
+import { useState, useTransition } from "react";
+import { Book } from "@/db/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Book } from "@/db/schema";
-import { Edit, Star, Trash2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Edit, Trash2, Star } from "lucide-react";
 import Image from "next/image";
-import { useState, useTransition } from "react";
 import { EditEntryModal } from "./tbr-edit-modal";
 // Import your server actions when ready
 // import { deleteBook, updateBookStatus } from "@/actions/tbr-actions";
@@ -21,7 +21,7 @@ export const TBRCard = ({ book, onUpdate }: TBRCardProps) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Client-side handler functions
-  const handleEdit = (book: Book) => {
+  const handleEdit = () => {
     setIsEditModalOpen(true);
   };
 
@@ -139,7 +139,7 @@ export const TBRCard = ({ book, onUpdate }: TBRCardProps) => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleEdit(book)}
+                    onClick={() => handleEdit()}
                     disabled={isPending}
                     className="text-gray-400 hover:text-white hover:bg-gray-800"
                   >

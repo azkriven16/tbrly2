@@ -1,13 +1,10 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { useState, useMemo, useEffect } from "react";
+import { Book, BOOK_CATEGORIES, BOOK_STATUSES } from "@/db/schema";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -15,9 +12,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Book, BOOK_CATEGORIES, BOOK_STATUSES } from "@/db/schema";
-import { ChevronDown, Search, SlidersHorizontal, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+  Search,
+  Filter,
+  X,
+  ChevronDown,
+  SlidersHorizontal,
+} from "lucide-react";
 
 interface TBRFiltersProps {
   books: Book[];
@@ -49,7 +55,7 @@ export const TBRFilters = ({
 
   // Filter and sort books based on current filters
   const filteredBooks = useMemo(() => {
-    let filtered = books.filter((book) => {
+    const filtered = books.filter((book) => {
       // Search filter
       if (
         searchTerm &&
@@ -88,7 +94,7 @@ export const TBRFilters = ({
     });
 
     // Sort books
-    filtered.sort((a, b) => {
+    const sorted = [...filtered].sort((a, b) => {
       switch (sortBy) {
         case "title":
           return a.title.localeCompare(b.title);
@@ -107,7 +113,7 @@ export const TBRFilters = ({
       }
     });
 
-    return filtered;
+    return sorted;
   }, [
     books,
     searchTerm,
@@ -343,7 +349,7 @@ export const TBRFilters = ({
               variant="outline"
               className="bg-gray-800 text-gray-300 border-gray-600"
             >
-              Search: "{searchTerm}"
+              Search: &quot;{searchTerm}&quot;
               <button
                 onClick={() => setSearchTerm("")}
                 className="ml-2 hover:text-red-400"
