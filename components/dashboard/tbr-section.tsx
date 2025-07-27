@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useOptimistic,
-  useTransition,
-  useCallback,
-  useMemo,
-  useRef,
-} from "react";
+import { useState, useOptimistic, useCallback, useMemo, useRef } from "react";
 import type { Book } from "@/db/schema";
 import { Button } from "@/components/ui/button";
 import { TBRCard } from "@/components/dashboard/tbr-card";
@@ -19,8 +12,6 @@ interface TBRSectionProps {
 }
 
 export const TBRSection = ({ initialBooks, onRefresh }: TBRSectionProps) => {
-  const [isPending, startTransition] = useTransition();
-
   // Optimistic state for book operations (deletions, status changes, etc.)
   const [optimisticBooks, updateOptimisticBooks] = useOptimistic(
     initialBooks,

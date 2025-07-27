@@ -101,13 +101,12 @@ export const DeleteTBRModal = ({
             </div>
           </div>
         </DialogHeader>
-
         <div className="py-4">
           <p className="text-gray-300 mb-4">
             Are you sure you want to delete{" "}
-            <span className="font-semibold text-white">"{book.title}"</span>?
+            <span className="font-semibold text-white">{`"${book.title}"`}</span>
+            ?
           </p>
-
           {book.notes && (
             <div className="bg-gray-800 rounded-lg p-3 border border-gray-700">
               <p className="text-sm text-gray-400 mb-1">
@@ -117,7 +116,6 @@ export const DeleteTBRModal = ({
             </div>
           )}
         </div>
-
         <DialogFooter className="gap-2">
           <Button
             variant="outline"
