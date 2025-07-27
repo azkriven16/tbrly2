@@ -9,10 +9,9 @@ export default function DailyReadingPage() {
             habits.
           </p>
         </div>
-
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-lg border p-6">
-            <h2 className="text-xl font-semibold mb-4">Today's Progress</h2>
+            <h2 className="text-xl font-semibold mb-4">{"Today's Progress"}</h2>
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span>Pages Read</span>
@@ -27,7 +26,6 @@ export default function DailyReadingPage() {
               </div>
             </div>
           </div>
-
           <div className="rounded-lg border p-6">
             <h2 className="text-xl font-semibold mb-4">Current Book</h2>
             <div className="space-y-2">
